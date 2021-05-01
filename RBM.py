@@ -66,5 +66,6 @@ class RBM():
         plt.savefig(savefile)
     def reconstruct(self, V):
         Hp, Hs = self.posetivePhase(V)
-        Vp, Vs = self.negativePhase(Hp)  # reconstructionPhase
-        return Vp,Hp
+        Vp, Vs = self.negativePhase(Hs)  # reconstructionPhase
+        return Vp,Hs
+    

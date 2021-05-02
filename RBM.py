@@ -16,11 +16,13 @@ class RBM():
         self.hb_delta = np.zeros(hiddenLayers) # hidden unit bias gradient
         
     def posetivePhase(self, visibleLayer):
-        pdH = expit(np.matmul(visibleLayer, self.vhW) + self.hlbias) # probability distribution of the hidden layer.
+        # probability distribution of the hidden layer.
+        pdH = self.sigmoid(np.matmul(visibleLayer, self.vhW) + self.hlbias) 
         return (pdH, np.random.binomial(1, p=pdH))
     
     def negativePhase(self, hiddenLayer):
-        pdV = expit(np.matmul(hiddenLayer, self.vhW.T) + self.vlbias)  # probability distribution of the visible layer.
+        # probability distribution of the visible layer.
+        pdV = self.sigmoid(np.matmul(hiddenLayer, self.vhW.T) + self.vlbias)  
         return (pdV, np.random.binomial(1, p=pdV))
     
     def compute_error_and_grads(self, batch):
@@ -34,9 +36,6 @@ class RBM():
         hb_delta = np.sum(ph0, axis=0)
         
         # Compute gradients - Negative Phase
-        
-        # only contrastive with k = 1, i.e., method="cd"
-
         pv1, v1 = self.negativePhase(h0)
         ph1, h1 = self.posetivePhase(pv1)
         
@@ -68,4 +67,5 @@ class RBM():
         Hp, Hs = self.posetivePhase(V)
         Vp, Vs = self.negativePhase(Hs)  # reconstructionPhase
         return Vp,Hs
-    
+    def sigmoid(self,x):
+        return 1 / (1 + np.exp(-x))

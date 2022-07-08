@@ -9,7 +9,7 @@ The hidden unit will be the representation or encoding of our data. The input la
 
 The implementation process of RBM can be summerized in to two process. 
 
-<b>1. The forward pass:</b> In this pass every imput will be combined with an individual weight and one overall bias. Then the result will be passed to the hidden layer. Then we will apply Gibbs sampling on the hidden layer.<br>
+<b>1. The forward pass:</b> In this pass every input will be combined with an individual weight and one overall bias. Then the result will be passed to the hidden layer. Then we will apply Gibbs sampling on the hidden layer.<br>
 
 <b>2. The backward pass:</b> Each activated nodes from hidden layer will be used to reconstruct the visible layer and compute our loss.
 
